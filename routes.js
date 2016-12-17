@@ -5,23 +5,42 @@ var JSX = require('node-jsx').install(),
   TweetAnalyzerContainer = React.createFactory(require('./containers/TweetAnalyzerContainer')),
   twitter = require('twitter');
 
+
 module.exports = {
 
   index: function(req, res) {
     var twit = new twitter(config.twitter);
-    var params = {screen_name: 'cblicious'};
-    twit.get('statuses/home_timeline', params, function(error, tweets, response) {
+    var params = {screen_name: 'cblicious', count : 200};
+
+
+    var result = twit.get('statuses/home_timeline', params, function(error, tweets, response) {
       if (!error) {
-        console.log(tweets);
+
+        var tweetsByUser = tweets.map(function(tweet){
+          var user = tweet.user.name;
+         return user;
+       });
+
+       var tweetsCount = tweetsByUser.reduce(function(userCount, currentTweet){
+        if(typeof userCount[currentTweet] !== "undefined"){
+          userCount[currentTweet]++;
+          return userCount;
+        } else {
+            userCount[currentTweet]=1;
+            return userCount;
+        }
+      },[]);
+        console.log(tweetsCount);
       } else {
         console.log(error);
       }
 
         });
+      console.log(tweetsByUser);
       //  render and pass the vairables
       var markup = ReactDOMServer.renderToString (
            TweetAnalyzerContainer({
-
+             tweets: tweetsByUser
            })
          );
       // Render our 'home' template

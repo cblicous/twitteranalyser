@@ -26,10 +26,10 @@ module.exports = TweetsList = React.createClass({
 
   // Render the component
   render: function(props){
-    console.log(props);
+    console.log(this.state);
     return (
       <div className="tweets-list">
-        Hello world
+      {this.state.tweets}
       </div>
     )
 
