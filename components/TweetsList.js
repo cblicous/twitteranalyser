@@ -29,7 +29,7 @@ module.exports = TweetsList = React.createClass({
     console.log(this.state);
     return (
       <div className="tweets-list">
-      {this.state.tweets}
+       Test
       </div>
     )
 
