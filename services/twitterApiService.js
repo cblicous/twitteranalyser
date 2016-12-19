@@ -9,16 +9,21 @@ module.exports.getAllTweets = function () {
     return  twit.get('statuses/home_timeline', params).then(
         function (tweets) {
           var tweetsByUser = tweets.map(function (tweet) {
-            var user = tweet.user.name
-            return user
+            var user = tweet.user.name;
+            return user;
           })
           var tweetsCount = tweetsByUser.reduce(function (userCount, currentTweet) {
             if (typeof userCount[currentTweet] !== 'undefined') {
-              userCount[currentTweet]++
-              return userCount
+
+              userCount[currentTweet].value++;
+              return userCount;
             } else {
-              userCount[currentTweet] = 1
-              return userCount
+              userCount[currentTweet] = {
+                  value: 1,
+                    name: currentTweet
+                  };
+
+              return userCount;
             }
           }, {});
           return(tweetsCount);

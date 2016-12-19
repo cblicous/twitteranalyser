@@ -24,11 +24,8 @@ var Home = React.createClass({
   },
   render: function (props) {
     return this.state.isLoading === true ? <p>LOADING</p> :
-    <div className='jumbotron col-sm-12 text-center' >
-      <h1>Twitter Feed Analyzer</h1>
-      <p className='lead'>Twitter feed analyzer</p>
       <Items tweets={this.state.tweets} />
-    </div>
+
   }
 })
 module.exports = Home

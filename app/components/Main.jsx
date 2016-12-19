@@ -4,7 +4,11 @@ var Main = React.createClass({
   render: function () {
     return (
       <div className='main-container'>
-        {this.props.children}
+        <div className='jumbotron col-sm-12 text-center' >
+          <h1>Twitter Feed Analyzer</h1>
+          <p className='lead'>Twitter feed analyzer</p>
+            {this.props.children}
+            </div>
       </div>
     )
   }

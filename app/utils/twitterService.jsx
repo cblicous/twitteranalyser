@@ -10,7 +10,9 @@ var twitterService = {
 
   getTopTwitters: function () {
     return axios.get('http://localhost:8080/api').then(function (response) {
-        return response.data
+      // could add  this also in the Items.jsx. but for the lulz
+      // here transform from object to array
+        return response.data;
     })
    .catch(function (err) {
      console.warn('Error in getting tweets: ', err)

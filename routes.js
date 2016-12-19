@@ -9,7 +9,9 @@ module.exports = {
 
   apiGetFeed :function(req, res) {
     twitterService.getAllTweets().then(function (tweet){
-        res.end(JSON.stringify(tweet));
+      res.setHeader('Content-Type', 'application/json');
+
+      res.send(JSON.stringify( tweet));
       }).catch(function (error) {
       throw error;
     })

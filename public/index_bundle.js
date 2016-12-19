@@ -26419,7 +26419,21 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'main-container' },
-	      this.props.children
+	      React.createElement(
+	        'div',
+	        { className: 'jumbotron col-sm-12 text-center' },
+	        React.createElement(
+	          'h1',
+	          null,
+	          'Twitter Feed Analyzer'
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'lead' },
+	          'Twitter feed analyzer'
+	        ),
+	        this.props.children
+	      )
 	    );
 	  }
 	});
@@ -26463,21 +26477,7 @@
 	      'p',
 	      null,
 	      'LOADING'
-	    ) : React.createElement(
-	      'div',
-	      { className: 'jumbotron col-sm-12 text-center' },
-	      React.createElement(
-	        'h1',
-	        null,
-	        'Twitter Feed Analyzer'
-	      ),
-	      React.createElement(
-	        'p',
-	        { className: 'lead' },
-	        'Twitter feed analyzer'
-	      ),
-	      React.createElement(Items, { tweets: this.state.tweets })
-	    );
+	    ) : React.createElement(Items, { tweets: this.state.tweets });
 	  }
 	});
 	module.exports = Home;
@@ -26500,6 +26500,8 @@
 
 	  getTopTwitters: function getTopTwitters() {
 	    return axios.get('http://localhost:8080/api').then(function (response) {
+	      // could add  this also in the Items.jsx. but for the lulz
+	      // here transform from object to array
 	      return response.data;
 	    }).catch(function (err) {
 	      console.warn('Error in getting tweets: ', err);
@@ -28006,23 +28008,35 @@
 
 	var React = __webpack_require__(2);
 
-	var Items = React.createClass({
-	    displayName: 'Items',
+	function valuesToArray(obj) {
+	  return Object.keys(obj).map(function (key) {
+	    return obj[key];
+	  });
+	}
 
-	    render: function render(props) {
-	        /*  var tweetItems = props.tweets.map(function(item, key) {
-	              return <div className="tweet">{item},{key}</div>;
-	          });
-	          return <div>{tweetItems}</div>;
-	          */
-	        return React.createElement(
-	            'div',
-	            null,
-	            ' ',
-	            props,
-	            ' '
-	        );
-	    }
+	var Items = React.createClass({
+	  displayName: 'Items',
+
+	  render: function render() {
+	    //  return <div> {JSON.stringify(this.props)} </div>
+
+	    var tweetItems = valuesToArray(this.props.tweets).map(function (item) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        item.name,
+	        ',',
+	        item.value
+	      );
+	    });
+	    return React.createElement(
+	      'div',
+	      null,
+	      tweetItems
+	    );
+	    //return <div> {JSON.stringify(this.props)} </div>
+	    /*  return <div> {JSON.stringify(this.props)} </div> */
+	  }
 	});
 	module.exports = Items;
 

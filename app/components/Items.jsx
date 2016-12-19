@@ -1,13 +1,19 @@
 var React = require('react');
 
+function valuesToArray(obj) {
+  return Object.keys(obj).map(function (key) { return obj[key]; });
+}
+
 var Items = React.createClass({
-    render: function(props) {
-      /*  var tweetItems = props.tweets.map(function(item, key) {
-            return <div className="tweet">{item},{key}</div>;
-        });
-        return <div>{tweetItems}</div>;
-        */
-        return <div> {props} </div>
+    render: function() {
+    //  return <div> {JSON.stringify(this.props)} </div>
+
+      var tweetItems = valuesToArray(this.props.tweets).map(function(item) {
+         return <div>{item.name},{item.value}</div>
+       });
+       return <div>{tweetItems}</div>;
+       //return <div> {JSON.stringify(this.props)} </div>
+    /*  return <div> {JSON.stringify(this.props)} </div> */
     }
 });
 module.exports = Items;
