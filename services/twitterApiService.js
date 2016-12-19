@@ -3,10 +3,10 @@ var config = require('../config')
 // Services for API
 module.exports.getAllTweets = function () {
 
-  var promise = new Promise( function(resolve, reject) {
+
     var twit = new twitter(config.twitter)
     var params = {screen_name: 'cblicious', count: 200}
-      twit.get('statuses/home_timeline', params).then(
+    return  twit.get('statuses/home_timeline', params).then(
         function (tweets) {
           var tweetsByUser = tweets.map(function (tweet) {
             var user = tweet.user.name
@@ -21,11 +21,9 @@ module.exports.getAllTweets = function () {
               return userCount
             }
           }, {});
-          resolve(tweetsCount);
+          return(tweetsCount);
         }).catch(function (error) {
-          reject( error);
-        });
-    });
-    return promise;
+          return( error);
+      });
 
 }
