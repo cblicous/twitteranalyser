@@ -1,6 +1,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var routes = require('./config/routes.jsx');
 
 var _APP_INFO = {
   name: 'Github Battle',
@@ -8,4 +9,4 @@ var _APP_INFO = {
   version: '1.0'
 }
 
-ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('app'));
+ReactDOM.render(routes, document.getElementById('app'));
