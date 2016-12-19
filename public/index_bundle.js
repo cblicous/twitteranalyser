@@ -26436,6 +26436,7 @@
 	var ReactRouter = __webpack_require__(180);
 	var Link = ReactRouter.Link;
 	var twitterService = __webpack_require__(237);
+	var Items = __webpack_require__(263);
 
 	var Home = React.createClass({
 	  displayName: 'Home',
@@ -26449,7 +26450,6 @@
 	      tweets: []
 	    };
 	  },
-
 	  componentDidMount: function componentDidMount() {
 	    twitterService.getTopTwitters().then(function (tweetsFound) {
 	      this.setState({
@@ -26458,9 +26458,7 @@
 	      });
 	    }.bind(this));
 	  },
-
 	  render: function render(props) {
-	    console.log(this.state.tweets);
 	    return this.state.isLoading === true ? React.createElement(
 	      'p',
 	      null,
@@ -26478,7 +26476,7 @@
 	        { className: 'lead' },
 	        'Twitter feed analyzer'
 	      ),
-	      this.state.tweets.length
+	      React.createElement(Items, { tweets: this.state.tweets })
 	    );
 	  }
 	});
@@ -26501,7 +26499,9 @@
 	var twitterService = {
 
 	  getTopTwitters: function getTopTwitters() {
-	    return getFeed().catch(function (err) {
+	    return axios.get('http://localhost:8080/api').then(function (response) {
+	      return response.data;
+	    }).catch(function (err) {
 	      console.warn('Error in getting tweets: ', err);
 	    });
 	  }
@@ -27997,6 +27997,34 @@
 	  };
 	};
 
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(2);
+
+	var Items = React.createClass({
+	    displayName: 'Items',
+
+	    render: function render(props) {
+	        /*  var tweetItems = props.tweets.map(function(item, key) {
+	              return <div className="tweet">{item},{key}</div>;
+	          });
+	          return <div>{tweetItems}</div>;
+	          */
+	        return React.createElement(
+	            'div',
+	            null,
+	            ' ',
+	            props,
+	            ' '
+	        );
+	    }
+	});
+	module.exports = Items;
 
 /***/ }
 /******/ ]);
