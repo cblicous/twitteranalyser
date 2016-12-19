@@ -1,8 +1,6 @@
-var JSX = require('node-jsx').install(),
-React = require('react'),
-ReactDOMServer = require('react-dom/server'),
-TweetAnalyzerContainer = React.createFactory(require('./containers/TweetAnalyzerContainer'));
-
+var JSX = require('node-jsx').install();
+var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 
 var twitterService = require('./services/twitterApiService.js');
 
@@ -13,18 +11,16 @@ module.exports = {
     twitterService.getAllTweets().then(function (tweet){
         console.log(tweet);
         res.end(JSON.stringify(tweet));
-        //res.end("hallo" + tweet['Fat Pikachu'])
-        //res.json(tweet)
       }).catch(function (error) {
       throw error;
     })
     },
 
   index: function(req, res) {
-      //  render and pass the vairables
-      var markup = ReactDOMServer.renderToString (
+    // Render React to a string, passing in our fetched tweets
+         var markup = ReactDOMServer.renderToString(
            TweetAnalyzerContainer({
-
+             tweets: []
            })
          );
       // Render our 'home' template
