@@ -26,7 +26,17 @@ module.exports.getAllTweets = function () {
               return userCount;
             }
           }, {});
-          return(tweetsCount);
+          // transform into arra and sort
+          var sortable = [];
+          for (var tweet in tweetsCount){
+              sortable.push([tweetsCount[tweet]]);
+            }
+
+          sortable.sort(function(a, b) {
+              return b[0].value -  a[0].value;
+          })
+
+          return(sortable);
         }).catch(function (error) {
           return( error);
       });

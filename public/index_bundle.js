@@ -28022,19 +28022,34 @@
 
 	    var tweetItems = valuesToArray(this.props.tweets).map(function (item) {
 	      return React.createElement(
-	        'div',
+	        'tr',
 	        null,
-	        item.name,
-	        ',',
-	        item.value
+	        React.createElement(
+	          'td',
+	          null,
+	          item[0].name
+	        ),
+	        React.createElement(
+	          'td',
+	          null,
+	          item[0].value
+	        )
 	      );
 	    });
 	    return React.createElement(
 	      'div',
-	      null,
-	      tweetItems
+	      { className: 'center-block' },
+	      React.createElement(
+	        'table',
+	        { className: 'table' },
+	        React.createElement(
+	          'tbody',
+	          null,
+	          tweetItems
+	        )
+	      )
 	    );
-	    //return <div> {JSON.stringify(this.props)} </div>
+	    // return <div> {JSON.stringify(this.props)} </div>
 	    /*  return <div> {JSON.stringify(this.props)} </div> */
 	  }
 	});
