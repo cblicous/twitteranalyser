@@ -8,12 +8,20 @@ var express = require('express'),
 var app = express();
 var port = process.env.PORT || 8080;
 
-
-// Set handlebars as the templating engine
-
 // Disable etag headers on responses
 app.disable('etag');
 
+// Integration of webpack-dev-middleware to compile react on runtime
+// see plugin description
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config.js');
+var compiler = webpack(webpackConfig);
+
+app.use(require("webpack-dev-middleware")(compiler, {
+    noInfo: true, publicPath: webpackConfig.output.publicPath
+}));
+app.use(require("webpack-hot-middleware")(compiler));
+// end of that
 
 
 // Index Route

@@ -9,7 +9,7 @@ var Items = React.createClass({
     //  return <div> {JSON.stringify(this.props)} </div>
 
     var tweetItems = valuesToArray(this.props.tweets).map(function (item) {
-      return <tr><td>{item[0].name}</td><td>{item[0].value}</td></tr>
+      return <tr><td className="col-md-2">{item[0].name}</td><td className="col-md-1">{item[0].value}</td></tr>
     })
     return (
       <div className='center-block'>

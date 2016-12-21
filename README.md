@@ -1,8 +1,11 @@
-Twitter analyzer 
+# Twitter analyzer
 
-First tryouts react + node + twitter
+* Groups your tweets by username in descending order
+* First tryouts react + node + twitter
+* Uses webpack, React Frontend and "JSON" backend which connects to twitter and fetches the data
 
+# Setup
 
-npm install 
-copy and fill out config.js 
-webpack && node server.js
+* npm install
+* copy and fill out config.js
+* node server.js
